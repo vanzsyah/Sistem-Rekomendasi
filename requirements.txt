@@ -3,7 +3,7 @@ nltk==3.8.1
 contractions==0.1.73
 
 # Data Manipulation Libraries
-numpy==1.23.5
+numpy==2.0.0
 pandas==1.5.3
 
 # Machine Learning Libraries
