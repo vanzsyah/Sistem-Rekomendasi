@@ -1,4 +1,5 @@
 import re
+import os
 import nltk
 nltk.download('stopwords')
 import warnings
@@ -95,7 +96,8 @@ def main():
     df_new = df_new.drop(columns=['model'])
     print(df_new, '\n')
 
-    joblib.dump((df_clustered, dbi_score, cluster_counts, cluster_eval_results), 'model_data.pkl')
+    output_path = os.path.join(base_dir, "model_data.pkl")
+    joblib.dump((df_clustered, dbi_score, cluster_counts, cluster_eval_results), 'output_path')
     print("Model berhasil disimpan sebagai model_data.pkl")
 
 if __name__ == "__main__":

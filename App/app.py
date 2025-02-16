@@ -1,3 +1,4 @@
+import os
 import joblib
 import streamlit as st
 import pandas as pd
@@ -5,8 +6,12 @@ import pandas as pd
 # Load saved models and data
 
 try:
-    with open("../src/model_data.pkl", "rb") as f:
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    model_path = os.path.join(base_dir, "../src/model_data.pkl")
+    
+    with open(model_path, "rb") as f:
         df_clustered, dbi_score, cluster_counts, cluster_eval_results = joblib.load(f)
+    
     print("File loaded successfully!")
 except Exception as e:
     print(f"Error loading file: {e}")

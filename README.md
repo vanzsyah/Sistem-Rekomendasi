@@ -12,7 +12,7 @@ Proyek ini merupakan bagian dari skripsi yang telah berhasil diterbitkan di jurn
 ## Struktur Proyek
 
 ```
-/RepositoriAnda
+/Sistem-Rekomendasi
 │
 ├── /data
 │   └── clean_data_manual.csv       # Dataset yang digunakan untuk pelatihan dan clustering
@@ -26,6 +26,7 @@ Proyek ini merupakan bagian dari skripsi yang telah berhasil diterbitkan di jurn
 │
 └── README.md
 └── requirements.txt
+└── runtime.txt
 ```
 
 ## Cara Menjalankan Proyek
