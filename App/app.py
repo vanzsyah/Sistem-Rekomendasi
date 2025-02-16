@@ -4,7 +4,7 @@ import pandas as pd
 
 # Load saved models and data
 
-with open("../src/model_data.pkl", "rb") as f:
+with open("mount/src/model_data.pkl", "rb") as f:
         df_clustered, dbi_score, cluster_counts, cluster_eval_results = joblib.load(f)
    
 # Generate recommendations
