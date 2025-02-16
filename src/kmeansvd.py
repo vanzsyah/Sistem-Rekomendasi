@@ -1,5 +1,6 @@
 import re
 import nltk
+nltk.download('stopwords')
 import warnings
 import numpy as np
 import contractions
