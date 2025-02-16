@@ -94,8 +94,14 @@ def main():
     df_new = df_new.drop(columns=['model'])
     print(df_new, '\n')
 
-    joblib.dump((df_clustered, dbi_score, cluster_counts, cluster_eval_results), 'model_data.pkl')
-    print("Model berhasil disimpan sebagai model_data.pkl")
+    try:
+        with open("model_data.pkl", "rb") as f:
+            df_clustered, dbi_score, cluster_counts, cluster_eval_results = joblib.load(f)
+        print("Model berhasil disimpan sebagai model_data.pkl")
+    except Exception as e:
+        print("Model gagal disimpan sebagai model_data.pkl")
+
+    
 
 if __name__ == "__main__":
     main()
