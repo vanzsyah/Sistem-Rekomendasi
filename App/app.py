@@ -12,8 +12,10 @@ try:
         df_clustered, dbi_score, cluster_counts, cluster_eval_results = joblib.load(f)
     
     print("File loaded successfully!")
+except FileNotFoundError:
+    st.error(f"File 'model_data.pkl' tidak ditemukan di path: {model_path}")
 except Exception as e:
-    print(f"Error loading file: {e}")
+    st.error(f"Error memuat file: {e}")
 
 # Generate recommendations
 def generate_recommendations(model, user_id, items_to_predict):
