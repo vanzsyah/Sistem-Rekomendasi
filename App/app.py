@@ -6,7 +6,7 @@ import pandas as pd
 #df_clustered, dbi_score, cluster_counts, cluster_eval_results = joblib.load('../src/model_data.pkl')
 
 try:
-    with open("model_data.pkl", "rb") as f:
+    with open("../src/model_data.pkl", "rb") as f:
         df_clustered, dbi_score, cluster_counts, cluster_eval_results = joblib.load(f)
     print("File loaded successfully!")
 except Exception as e:
