@@ -3,10 +3,8 @@ import streamlit as st
 import pandas as pd
 
 # Load saved models and data
+#df_clustered, dbi_score, cluster_counts, cluster_eval_results = joblib.load('../src/model_data.pkl')
 
-with open("../mount/src/model_data.pkl", "rb") as f:
-        df_clustered, dbi_score, cluster_counts, cluster_eval_results = joblib.load(f)
-   
 # Generate recommendations
 def generate_recommendations(model, user_id, items_to_predict):
     recommendations = [(item, model.predict(user_id, item).est) for item in items_to_predict]
@@ -15,6 +13,13 @@ def generate_recommendations(model, user_id, items_to_predict):
 # Streamlit app
 def main():
     st.title("Product Recommendation System")
+
+    try:
+        with open("../src/model_data.pkl", "rb") as f:
+            df_clustered, dbi_score, cluster_counts, cluster_eval_results = joblib.load(f)
+        print("File loaded successfully!")
+    except Exception as e:
+        print(f"Error loading file: {e}")
 
     product_list = df_clustered['item'].tolist()
     selected_product = st.selectbox("Select a Product", product_list)
