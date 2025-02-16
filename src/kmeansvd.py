@@ -83,11 +83,16 @@ def build_recommendation_models_by_cluster(df, df_clustered):
 
 # Main training process
 def main():
-    df = load_data('../data/clean_data_manual.csv')
-    df_vectorized = vectorize_reviews(df)
+    df_raw = load_data('../data/clean_data_manual.csv')
+    df_processed = preprocess_reviews(df_raw)
+    df_vectorized = vectorize_reviews(df_processed)
     df_clustered, dbi_score, cluster_counts = perform_clustering(df_vectorized)
 
-    cluster_eval_results = build_recommendation_models_by_cluster(df, df_clustered)
+    cluster_eval_results = build_recommendation_models_by_cluster(df_raw, df_clustered)
+
+    df_new = pd.DataFrame.from_dict(cluster_eval_results, orient='index')
+    df_new = df_new.drop(columns=['model'])
+    print(df_new, '\n')
 
     joblib.dump((df_clustered, dbi_score, cluster_counts, cluster_eval_results), 'model_data.pkl')
     print("Model berhasil disimpan sebagai model_data.pkl")

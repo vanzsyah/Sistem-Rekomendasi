@@ -2,6 +2,7 @@
 
 Proyek ini merupakan bagian dari skripsi yang telah berhasil diterbitkan di jurnal nasional. Penelitian ini fokus pada penerapan teknik machine learning untuk sistem rekomendasi berbasis data teks dan numerik.
 
+
 # 📄 Publikasi Jurnal:
 
     Judul: Sistem Rekomendasi Pembelian Smartphone berbasis Algoritma K-Means dan Singular Value Decomposition
@@ -18,7 +19,7 @@ Proyek ini merupakan bagian dari skripsi yang telah berhasil diterbitkan di jurn
 │
 ├── /src
 │   └── kmeansvd.py                 # Script untuk clustering dan pelatihan model
-│   └── model.pkl                   # Model dan hasil clustering yang disimpan
+│   └── model_data.pkl                   # Model dan hasil clustering yang disimpan
 │
 ├── /App
 │   └── app.py                      # Aplikasi Streamlit untuk rekomendasi produk
@@ -32,8 +33,8 @@ Proyek ini merupakan bagian dari skripsi yang telah berhasil diterbitkan di jurn
 ### 1. Clone Repositori
 
 ```bash
-git clone https://github.com/username-anda/repositori-anda.git
-cd repositori-anda
+git clone https://github.com/vanzsyah/Sistem-Rekomendasi.git
+cd Sistem-Rekomendasi
 ```
 
 ### 2. Install Dependensi
@@ -87,6 +88,11 @@ Buka link localhost yang disediakan di browser Anda untuk berinteraksi dengan ap
 
 ## Dependensi
 
+Proyek ini dijalankan dengan Anaconda3-2023.07-2-Windows-x86_64
+install scikit-surprise
+```bash
+conda install -c conda-forge scikit-surprise
+```
 Lihat `requirements.txt` untuk semua paket yang dibutuhkan.
----
+
 
