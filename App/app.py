@@ -6,8 +6,7 @@ import pandas as pd
 # Load saved models and data
 
 try:
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    model_path = os.path.join(base_dir, "../src/model_data.pkl")
+    model_path = os.path.join("src", "model_data.pkl")
     
     with open(model_path, "rb") as f:
         df_clustered, dbi_score, cluster_counts, cluster_eval_results = joblib.load(f)
