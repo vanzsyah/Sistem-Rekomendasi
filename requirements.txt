@@ -1,13 +1,13 @@
 # Text Processing Libraries
-nltk==3.8.1
-contractions==0.1.73
+nltk
+contractions
 
 # Data Manipulation Libraries
 numpy
-pandas==1.5.3
+pandas
 
 # Machine Learning Libraries
-scikit-learn==1.3.0
+scikit-learn
 scipy
 
 # Recommendation System Library
