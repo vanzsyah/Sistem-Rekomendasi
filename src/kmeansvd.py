@@ -81,22 +81,6 @@ def build_recommendation_models_by_cluster(df, df_clustered):
         
     return cluster_eval_results
 
-import os
-import streamlit as st
-
-def list_files(startpath):
-    file_structure = []
-    for root, dirs, files in os.walk(startpath):
-        level = root.replace(startpath, "").count(os.sep)
-        indent = "│   " * level + "├── "
-        file_structure.append(f"{indent}{os.path.basename(root)}/")
-        sub_indent = "│   " * (level + 1) + "├── "
-        for f in files:
-            file_structure.append(f"{sub_indent}{f}")
-    return file_structure
-
-
-
 # Main training process
 def main():
     df_raw = load_data('../data/clean_data_manual.csv')
@@ -110,24 +94,8 @@ def main():
     df_new = df_new.drop(columns=['model'])
     print(df_new, '\n')
 
-st.title("📂 Struktur Folder di Streamlit Cloud")
-
-# Tentukan path root dari proyek
-root_dir = os.getcwd()
-files = list_files(root_dir)
-
-# Tampilkan hasil di Streamlit
-st.text("\n".join(files))
-
-"""
-    try:
-        with open("model_data.pkl", "rb") as f:
-            df_clustered, dbi_score, cluster_counts, cluster_eval_results = joblib.load(f)
-        print("Model berhasil disimpan sebagai model_data.pkl")
-    except Exception as e:
-        print("Model gagal disimpan sebagai model_data.pkl")
-
-""" 
+    joblib.dump((df_clustered, dbi_score, cluster_counts, cluster_eval_results), 'model_data.pkl')
+    print("Model berhasil disimpan sebagai model_data.pkl")
 
 if __name__ == "__main__":
     main()

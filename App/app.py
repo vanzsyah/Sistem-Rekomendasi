@@ -3,7 +3,14 @@ import streamlit as st
 import pandas as pd
 
 # Load saved models and data
-df_clustered, dbi_score, cluster_counts, cluster_eval_results = joblib.load('../src/model_data.pkl')
+#df_clustered, dbi_score, cluster_counts, cluster_eval_results = joblib.load('../src/model_data.pkl')
+
+try:
+    with open("model_data.pkl", "rb") as f:
+        df_clustered, dbi_score, cluster_counts, cluster_eval_results = joblib.load(f)
+    print("File loaded successfully!")
+except Exception as e:
+    print(f"Error loading file: {e}")
 
 # Generate recommendations
 def generate_recommendations(model, user_id, items_to_predict):
