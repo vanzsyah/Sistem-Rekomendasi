@@ -5,7 +5,7 @@ import pandas as pd
 
 # Cari path root dari proyek
 base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # Naik ke level atas dari /App
-model_path = os.path.join(base_dir, "src", "model_data.pkl")  # Arahkan ke /src/model_data.pkl
+model_path = os.path.join(base_dir, "src", "model.pkl")  # Arahkan ke /src/model_data.pkl
 
 # Load saved models and data
 if os.path.exists(model_path):
@@ -17,7 +17,7 @@ if os.path.exists(model_path):
         st.error(f"Error loading model data: {e}")
         df_clustered = pd.DataFrame()  # Empty DataFrame to prevent further crashes
 else:
-    st.error(f"File 'model_data.pkl' tidak ditemukan di path: {model_path}")
+    st.error(f"File 'model.pkl' tidak ditemukan di path: {model_path}")
     df_clustered = pd.DataFrame()
 
 # Generate recommendations
@@ -64,7 +64,7 @@ def main():
         for cluster, metrics in cluster_eval_results.items():
             st.sidebar.write(f"Cluster {cluster} : {cluster_counts[cluster]} items, \nRMSE: {metrics['rmse']:.4f}, MAE: {metrics['mae']:.4f}")
     else:
-        st.error("Data model tidak tersedia. Pastikan file 'model_data.pkl' telah diunggah.")
+        st.error("Data model tidak tersedia. Pastikan file 'model.pkl' telah diunggah.")
 
 if __name__ == "__main__":
     main()

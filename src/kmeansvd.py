@@ -101,7 +101,7 @@ def main():
     df_new = df_new.drop(columns=['model'])
     print(df_new, '\n')
     
-    output_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'model_data.pkl')
+    output_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'model.pkl')
     with open(output_path, 'wb') as f:
         pickle.dump((df_clustered, dbi_score, cluster_counts, cluster_eval_results), f)
     
