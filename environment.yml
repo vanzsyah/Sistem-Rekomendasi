@@ -1,0 +1,16 @@
+name: myenv
+channels:
+  - conda-forge
+dependencies:
+  - pip
+  - scikit-surprise
+  - pip:
+      - numpy
+      - cython
+      - pandas
+      - scipy
+      - contractions
+      - scikit-learn
+      - nltk
+      - joblib
+      - streamlit

@@ -1,5 +1,5 @@
-cython
 numpy
+cython
 pandas
 scikit-learn
 scipy
