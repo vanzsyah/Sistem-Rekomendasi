@@ -5,7 +5,7 @@ dependencies:
   - pip
   - scikit-surprise
   - pip:
-      - numpy
+      - numpy<=2.2.0
       - cython
       - pandas
       - scipy
