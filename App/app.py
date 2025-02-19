@@ -1,4 +1,4 @@
-import joblib
+import pickle
 import os
 import streamlit as st
 import pandas as pd
@@ -11,7 +11,7 @@ model_path = os.path.join(base_dir, "src", "model_data.pkl")  # Arahkan ke /src/
 if os.path.exists(model_path):
     try:
         with open(model_path, "rb") as f:
-            df_clustered, dbi_score, cluster_counts, cluster_eval_results = joblib.load(f)
+            df_clustered, dbi_score, cluster_counts, cluster_eval_results = pickle.load(f)
         st.success("Model data loaded successfully!")
     except Exception as e:
         st.error(f"Error loading model data: {e}")

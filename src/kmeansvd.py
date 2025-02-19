@@ -5,6 +5,7 @@ import warnings
 import numpy as np
 import contractions
 import pandas as pd
+import pickle
 from nltk.corpus import stopwords
 from surprise import SVD, Reader, Dataset, accuracy
 from surprise.model_selection import cross_validate
@@ -12,7 +13,7 @@ from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics import davies_bouldin_score
-from joblib import Parallel, delayed, dump
+from joblib import Parallel, delayed  # Hanya digunakan untuk paralelisasi, tidak untuk penyimpanan model
 
 # Suppress warnings
 warnings.filterwarnings('ignore')
@@ -101,7 +102,9 @@ def main():
     print(df_new, '\n')
     
     output_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'model_data.pkl')
-    dump((df_clustered, dbi_score, cluster_counts, cluster_eval_results), output_path)
+    with open(output_path, 'wb') as f:
+        pickle.dump((df_clustered, dbi_score, cluster_counts, cluster_eval_results), f)
+    
     print("Model berhasil disimpan sebagai model_data.pkl")
 
 if __name__ == "__main__":
