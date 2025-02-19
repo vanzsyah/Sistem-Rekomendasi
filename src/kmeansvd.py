@@ -1,7 +1,6 @@
 import re
 import os
 import nltk
-nltk.download('stopwords')
 import warnings
 import numpy as np
 import contractions
@@ -13,13 +12,17 @@ from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics import davies_bouldin_score
-import joblib
+from joblib import Parallel, delayed, dump
 
 # Suppress warnings
 warnings.filterwarnings('ignore')
 
 # Load and preprocess data
-def load_data(file_path):
+def load_data(file_name):
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # Ensure it works dynamically
+    file_path = os.path.join(base_dir, "data", file_name)
+    if not os.path.exists(file_path):
+        raise FileNotFoundError(f"File {file_path} not found.")
     df = pd.read_csv(file_path, sep='|', index_col=0)
     return df
 
@@ -58,46 +61,47 @@ def perform_clustering(df):
     
     return df, dbi, cluster_counts
 
-# Recommendation system
-def build_recommendation_models_by_cluster(df, df_clustered):
-    cluster_eval_results = {}
+# Parallelized recommendation model building
+def train_cluster_model(cluster, df, df_clustered):
+    cluster_items = df_clustered[df_clustered['cluster'] == cluster]['item']
+    cluster_data = df[df['item'].isin(cluster_items)]
     
-    for cluster in df_clustered['cluster'].unique():
-        cluster_items = df_clustered[df_clustered['cluster'] == cluster]['item']
-        cluster_data = df[df['item'].isin(cluster_items)]
-        
-        reader = Reader(rating_scale=(1.0, 10.0))
-        data = Dataset.load_from_df(cluster_data[['user', 'item', 'rating']], reader)
-        trainset = data.build_full_trainset()
+    reader = Reader(rating_scale=(1.0, 10.0))
+    data = Dataset.load_from_df(cluster_data[['user', 'item', 'rating']], reader)
+    trainset = data.build_full_trainset()
+    
+    svd_model = SVD(random_state=42)
+    svd_model.fit(trainset)
+    
+    cv_results = cross_validate(svd_model, data, measures=['RMSE', 'MAE'], cv=5, verbose=False)
+    
+    return {
+        'cluster': cluster,
+        'model': svd_model,
+        'rmse': np.mean(cv_results['test_rmse']),
+        'mae': np.mean(cv_results['test_mae'])
+    }
 
-        svd_model = SVD(random_state=42)
-        svd_model.fit(trainset)
-        
-        cv_results = cross_validate(svd_model, data, measures=['RMSE', 'MAE'], cv=5, verbose=False)
-        
-        cluster_eval_results[cluster] = {
-            'model': svd_model,
-            'rmse': np.mean(cv_results['test_rmse']),
-            'mae': np.mean(cv_results['test_mae'])
-        }
-        
-    return cluster_eval_results
+def build_recommendation_models_by_cluster(df, df_clustered):
+    clusters = df_clustered['cluster'].unique()
+    results = Parallel(n_jobs=-1)(delayed(train_cluster_model)(cluster, df, df_clustered) for cluster in clusters)
+    return {result['cluster']: {'model': result['model'], 'rmse': result['rmse'], 'mae': result['mae']} for result in results}
 
 # Main training process
 def main():
-    df_raw = load_data('../data/clean_data_manual.csv')
+    df_raw = load_data('clean_data_manual.csv')
     df_processed = preprocess_reviews(df_raw)
     df_vectorized = vectorize_reviews(df_processed)
     df_clustered, dbi_score, cluster_counts = perform_clustering(df_vectorized)
-
+    
     cluster_eval_results = build_recommendation_models_by_cluster(df_raw, df_clustered)
-
+    
     df_new = pd.DataFrame.from_dict(cluster_eval_results, orient='index')
     df_new = df_new.drop(columns=['model'])
     print(df_new, '\n')
-
-    output_path = os.path.join(base_dir, "model_data.pkl")
-    joblib.dump((df_clustered, dbi_score, cluster_counts, cluster_eval_results), 'output_path')
+    
+    output_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'model_data.pkl')
+    dump((df_clustered, dbi_score, cluster_counts, cluster_eval_results), output_path)
     print("Model berhasil disimpan sebagai model_data.pkl")
 
 if __name__ == "__main__":

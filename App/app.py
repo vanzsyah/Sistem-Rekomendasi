@@ -1,11 +1,13 @@
-import os
 import joblib
+import os
 import streamlit as st
 import pandas as pd
 
-# Load saved models and data
-model_path = os.path.join(os.path.dirname(__file__), "src", "model_data.pkl")
+# Cari path root dari proyek
+base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # Naik ke level atas dari /App
+model_path = os.path.join(base_dir, "src", "model_data.pkl")  # Arahkan ke /src/model_data.pkl
 
+# Load saved models and data
 if os.path.exists(model_path):
     try:
         with open(model_path, "rb") as f:
