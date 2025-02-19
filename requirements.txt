@@ -1,0 +1,9 @@
+numpy
+pandas
+scikit-learn
+scipy
+nltk
+contractions
+joblib
+streamlit
+scikit-surprise
