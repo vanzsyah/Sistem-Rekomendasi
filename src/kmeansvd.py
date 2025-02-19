@@ -105,7 +105,7 @@ def main():
     with open(output_path, 'wb') as f:
         pickle.dump((df_clustered, dbi_score, cluster_counts, cluster_eval_results), f)
     
-    print("Model berhasil disimpan sebagai model_data.pkl")
+    print("Model berhasil disimpan sebagai model.pkl")
 
 if __name__ == "__main__":
     main()
