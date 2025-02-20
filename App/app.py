@@ -1,7 +1,7 @@
-import pickle
-import os
 import streamlit as st
 import pandas as pd
+import os
+import joblib
 
 # Cari path root dari proyek
 base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # Naik ke level atas dari /App
@@ -11,7 +11,7 @@ model_path = os.path.join(base_dir, "src", "model.pkl")  # Arahkan ke /src/model
 if os.path.exists(model_path):
     try:
         with open(model_path, "rb") as f:
-            df_clustered, dbi_score, cluster_counts, cluster_eval_results = pickle.load(f)
+            df_clustered, dbi_score, cluster_counts, cluster_eval_results = joblib.load(f)
         st.success("Model data loaded successfully!")
     except Exception as e:
         st.error(f"Error loading model data: {e}")
