@@ -10,14 +10,14 @@ from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics import davies_bouldin_score
-from joblib import Parallel, delayed  # Hanya digunakan untuk paralelisasi, tidak untuk penyimpanan model
+from joblib import Parallel, delayed  
 
 # Suppress warnings
 warnings.filterwarnings('ignore')
 
 # Load and preprocess data
 def load_data(file_name):
-    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # Ensure it works dynamically
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) 
     file_path = os.path.join(base_dir, "data", file_name)
     if not os.path.exists(file_path):
         raise FileNotFoundError(f"File {file_path} not found.")
