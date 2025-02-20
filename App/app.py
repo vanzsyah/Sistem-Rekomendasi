@@ -5,7 +5,7 @@ import joblib
 
 # Cari path root dari proyek
 base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # Naik ke level atas dari /App
-model_path = os.path.join(base_dir, "src", "model.pkl")  # Arahkan ke /src/model_data.pkl
+model_path = os.path.join(base_dir, "src", "model_data.pkl")  # Arahkan ke /src/model_data.pkl
 
 # Load saved models and data
 if os.path.exists(model_path):
