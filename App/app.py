@@ -64,7 +64,7 @@ def main():
         for cluster, metrics in cluster_eval_results.items():
             st.sidebar.write(f"Cluster {cluster} : {cluster_counts[cluster]} items, \nRMSE: {metrics['rmse']:.4f}, MAE: {metrics['mae']:.4f}")
     else:
-        st.error("Data model tidak tersedia. Pastikan file 'model.pkl' telah diunggah.")
+        st.error("Data model tidak tersedia. Pastikan file 'model_data.pkl' telah diunggah.")
 
 if __name__ == "__main__":
     main()
