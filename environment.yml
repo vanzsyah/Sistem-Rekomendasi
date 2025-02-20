@@ -5,12 +5,10 @@ dependencies:
   - pip
   - scikit-surprise
   - pip:
-      - cython
       - numpy
       - pandas
       - scipy
       - contractions
       - scikit-learn
-      - nltk
       - joblib
       

@@ -1,13 +1,11 @@
-import re
 import os
-import nltk
 import warnings
 import numpy as np
 import contractions
 import pandas as pd
 import pickle
 from nltk.corpus import stopwords
-from surprise import SVD, Reader, Dataset, accuracy
+from surprise import SVD, Reader, Dataset
 from surprise.model_selection import cross_validate
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
