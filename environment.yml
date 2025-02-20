@@ -7,7 +7,6 @@ dependencies:
   - pip:
       - numpy
       - pandas
-      - scipy
       - contractions
       - scikit-learn
       - joblib
