@@ -3,12 +3,12 @@ channels:
   - conda-forge
 dependencies:
   - pip
-  - scikit-surprise
+  - scikit-surprise=1.1.14
   - pip:
-      - numpy
-      - pandas
-      - contractions
-      - scikit-learn
-      - joblib
-      - streamlit
+      - numpy=1.26.4
+      - pandas=2.2.2
+      - contractions=0.1.73
+      - scikit-learn=1.5.1
+      - joblib=1.4.2
+      - streamlit=1.37.1
       
