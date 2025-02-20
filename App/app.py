@@ -17,7 +17,7 @@ if os.path.exists(model_path):
         st.error(f"Error loading model data: {e}")
         df_clustered = pd.DataFrame()  
 else:
-    st.error(f"Could not find 'model.pkl' in path: {model_path}")
+    st.error(f"Could not find 'model_data.pkl' in path: {model_path}")
     df_clustered = pd.DataFrame()
 
 # Generate recommendations

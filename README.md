@@ -1,6 +1,8 @@
 # 📝 Tentang Proyek Ini
 
 Proyek ini merupakan bagian dari skripsi yang telah berhasil diterbitkan di jurnal nasional. Penelitian ini fokus pada penerapan teknik machine learning untuk sistem rekomendasi berbasis data teks dan numerik.
+[![Demo](https://img.shields.io/badge/-DEMO-red?style=for-the-badge&logo=streamlit&logoColor=white)][(https://sistem-rekomendasi-vanzsyah.streamlit.app/)]
+
 
 
 # 📄 Publikasi Jurnal:
