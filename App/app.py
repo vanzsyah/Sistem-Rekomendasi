@@ -3,9 +3,9 @@ import pandas as pd
 import os
 import joblib
 
-# Cari path root dari proyek
-base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # Naik ke level atas dari /App
-model_path = os.path.join(base_dir, "src", "model_data.pkl")  # Arahkan ke /src/model_data.pkl
+# Find path root from repo
+base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) 
+model_path = os.path.join(base_dir, "src", "model_data.pkl")
 
 # Load saved models and data
 if os.path.exists(model_path):
@@ -15,9 +15,9 @@ if os.path.exists(model_path):
         st.success("Model data loaded successfully!")
     except Exception as e:
         st.error(f"Error loading model data: {e}")
-        df_clustered = pd.DataFrame()  # Empty DataFrame to prevent further crashes
+        df_clustered = pd.DataFrame()  
 else:
-    st.error(f"File 'model.pkl' tidak ditemukan di path: {model_path}")
+    st.error(f"Could not find 'model.pkl' in path: {model_path}")
     df_clustered = pd.DataFrame()
 
 # Generate recommendations

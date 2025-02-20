@@ -19,14 +19,15 @@ Proyek ini merupakan bagian dari skripsi yang telah berhasil diterbitkan di jurn
 │
 ├── /src
 │   └── kmeansvd.py                 # Script untuk clustering dan pelatihan model
-│   └── model_data.pkl                   # Model dan hasil clustering yang disimpan
+│   └── model_data.pkl              # Model dan hasil clustering yang disimpan
 │
 ├── /App
 │   └── app.py                      # Aplikasi Streamlit untuk rekomendasi produk
 │
+└── environment.yml
+└── LICENSE.TXT
+└── packages.txt
 └── README.md
-└── requirements.txt
-└── runtime.txt
 ```
 
 ## Cara Menjalankan Proyek
@@ -40,19 +41,10 @@ cd Sistem-Rekomendasi
 
 ### 2. Install Dependensi
 
-Buat environment virtual (opsional tapi disarankan):
-
-```bash
-python -m venv env
-source env/bin/activate  # Untuk Linux/Mac
-# atau
-env\Scripts\activate    # Untuk Windows
-```
-
 Install library yang diperlukan:
 
 ```bash
-pip install -r requirements.txt
+conda env create -f environment.yml
 ```
 
 ### 3. Siapkan Data
@@ -89,11 +81,6 @@ Buka link localhost yang disediakan di browser Anda untuk berinteraksi dengan ap
 
 ## Dependensi
 
-Proyek ini dijalankan dengan Anaconda3-2023.07-2-Windows-x86_64
-install scikit-surprise
-```bash
-conda install -c conda-forge scikit-surprise
-```
-Lihat `requirements.txt` untuk semua paket yang dibutuhkan.
+Lihat `environment.yml` untuk semua library yang dibutuhkan.
 
 

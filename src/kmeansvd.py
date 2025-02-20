@@ -3,7 +3,6 @@ import warnings
 import numpy as np
 import contractions
 import pandas as pd
-import pickle
 from nltk.corpus import stopwords
 from surprise import SVD, Reader, Dataset
 from surprise.model_selection import cross_validate
@@ -11,14 +10,14 @@ from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics import davies_bouldin_score
-from joblib import Parallel, delayed  # Hanya digunakan untuk paralelisasi, tidak untuk penyimpanan model
+from joblib import Parallel, delayed  
 
 # Suppress warnings
 warnings.filterwarnings('ignore')
 
 # Load and preprocess data
 def load_data(file_name):
-    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # Ensure it works dynamically
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     file_path = os.path.join(base_dir, "data", file_name)
     if not os.path.exists(file_path):
         raise FileNotFoundError(f"File {file_path} not found.")
@@ -103,7 +102,7 @@ def main():
     with open(output_path, 'wb') as f:
         joblib.dump((df_clustered, dbi_score, cluster_counts, cluster_eval_results), f)
     
-    print("Model berhasil disimpan sebagai model_data.pkl")
+    print("The model has been successfully saved as model_data.pkl.")
 
 if __name__ == "__main__":
     main()
